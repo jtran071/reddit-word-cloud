@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+
+
+<head>
+
+<title> Reddit Word Cloud </title>
+</head>
+
+<body>
+
+    <div id="search">
+        <h1>Enter SubReddit Name</h1>
+        <input type="text" id="sub" class="searchbar">
+        <input type="submit" value="Submit" onclick="getInput()" placeholder="[Word, Count]">
+    </div>
+	
+	<div id="choiceSelect">
+        <form id="word_user">
+        <input type="radio" name="choice" value="words">
+            Words<br>
+        <input type="radio" name="choice" value="userlist">
+            Users<br>
+        </form>
+    </div>
+	
+	<div id="results">
+        <title2 id="resTitle">Results</title2>
+        <p id="repChoice"><p>
+        <p id="rep"><p>
+    </div>
+	
+	<div  class="row">
+		<div class="span1" id="canvas-container">
+			<canvas id="my_canvas" class="canvas" width="1280" height="720" style="width: 1080px;
+			height: 700px;">
+		</div>
+	</div>
+	
+
+
+
+<script>
+
+      var choiceCountSplit = [];
+      var temp;
+	  var counter;
+	
+	var width = document.getElementById("my_canvas").offsetWidth;
+	//var points = new Array(40, 100, 1, 5, 25, 10);
+	/*
+	var points1 = ["hello", 10];
+	var points2 = ["luul", 15];
+	var points3 = ["what", 5];
+
+	var list1 = [points1, points2, points3]
+	*/
+	function getRadio(){
+        var radioVals = document.getElementsByName('choice');
+          
+        for( var i = 0, length = radioVals.length; i < length; ++i){
+            if(radioVals[i].checked){
+            return radioVals[i].value;
+			}
+		}
+          return '*';
+    }
+	function getInput() {
+		input = document.getElementById("sub").value;
+		loadCloud(input);
+	}
+	
+	function loadCloud(input_text){
+        outputText = '';
+        var xhttp = new XMLHttpRequest();
+        var choiceof = getRadio();
+        xhttp.onreadystatechange = function(){
+            if(xhttp.readyState == 4 && xhttp.status == 200){
+                temp = xhttp.responseText;
+                choiceCountSplit = temp.split("|");
+                document.getElementById("repChoice").innerHTML = choiceCountSplit[0];
+                c  = tagGeoSplit[1];
+                outputTagMarkers(geocoordinates);
+            }
+        };
+        xhttp.open("POST", 'http://localhost:8888', true);
+        xhttp.send('purpose=tags&textLoc='+input_text.toLowerCase()+'&weekday='+choiceof);
+      }
+
+
+
+
+/*WordCloud(document.getElementById("my_canvas"), { list: list1, 
+  gridSize: Math.round(16 * document.getElementById("my_canvas").offsetWidth / 1024),
+  weightFactor: function (size) {
+    return Math.pow(size, 2.3) * document.getElementById("my_canvas").offsetWidth / 1024;
+  },
+  fontFamily: 'Times, serif',
+  color: function (word, weight) {
+    return (weight === 12) ? '#f02222' : '#c09292';
+  },
+  rotateRatio: 0.5,
+  rotationSteps: 2,
+  backgroundColor: '#ffe0e0'
+} );
+*/
+
+</script>
+	
+<script src="src/js/wordcloud2.js"></script>
+<script src="test.js"></script>
+
+
+</body>
+
+</html>

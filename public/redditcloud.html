@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link href="css/style.css" rel="stylesheet"/>
+	<link href="jquery-ui-1.12.1.custom/jquery-ui.min.css" rel="stylesheet"/>
+	<script src="src/js/jquery.js"></script>
+	<script src="jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+	<script src="src/js/wordcloud2.js"></script>
+	<title> Reddit Word Cloud </title>
+	<h1> Reddit Word Cloud </h1>
+</head>
+
+<body>
+
+	<div id="redo_button">
+        <p1>Search Again</p1>
+    </div>
+    
+    <div  class="row">
+		<div class="span1" id="canvas-container">
+			<canvas id="my_canvas" class="canvas" width="1280" height="720" style="width: 1080px;
+			height: 720px;">
+		</div>
+	</div>
+    
+
+<script>
+//get json data and make word cloud
+$(document).ready(function () {
+    $.ajax( {
+    	dataType: 'json',
+    	url: '/search-data',
+    	type: 'post',
+    	success: function(wordcount_list) {
+    		var cloud_list = []
+    		
+    		for(i = 0; i < wordcount_list.length; ++i) {
+    			cloud_list.push([wordcount_list[i].str_wu,
+    			 wordcount_list[i].count]);
+    		}
+			WordCloud($('#my_canvas')[0], { list: cloud_list, 
+			drawOutOfBound: false,
+			minSize: 12,
+			gridSize: 10,
+			weightFactor: function(size) {
+				return (100/(cloud_list[1][1]))*size;
+			}
+			});
+		}
+	});
+	$('#redo_button').button();
+	$('#redo_button').click(function() {
+		window.location.href='/search.html';
+	});
+});
+</script>
+</body>
+</html>

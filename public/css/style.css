@@ -1,0 +1,48 @@
+* {
+	font-family: Lucida Grande,Lucida Sans,Arial,sans-serif;
+}
+
+h1 {
+	color: #2e6e9e;
+	border: 1px solid #79b7e7;
+	border-radius: 8px;
+	background-color: #dfeffc;
+	text-align: center;
+}
+
+h2 {
+	color: #2e6e9e;
+	border: 1px solid #79b7e7;
+	border-radius: 8px;
+	background-color: #dfeffc;
+}
+
+p {
+	color: #2e6e9e;
+	border: 1px solid #79b7e7;
+	border-radius: 8px;
+	background-color: #dfeffc;
+}
+
+.error {
+	color:#cd0a0a;
+	border: 1px solid #cd0a0a;
+	border-radius: 8px;
+	background-color: #fef1ec;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+#start {
+	width: 20%;
+	text-align: center;
+	margin: auto;
+	margin-top: 150px;
+}
+
+#div-search {
+	width: 20%;
+	text-align: center;
+	margin: auto;
+	margin-top: 150px;
+}
