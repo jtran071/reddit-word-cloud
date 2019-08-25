@@ -1,5 +1,6 @@
 # reddit-word-cloud
 A website to display scraped data from Reddit as a word cloud
+
 Note: The website is no longer active since the Cassandra cluster has been turned off.
 
 ## How to install
